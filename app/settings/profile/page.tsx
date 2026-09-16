@@ -13,7 +13,7 @@ function SettingsError({ message }: { message: string }) {
 }
 
 export default async function Settings() {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();

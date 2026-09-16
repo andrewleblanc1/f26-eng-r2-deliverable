@@ -7,7 +7,7 @@ import SpeciesCard from "./species-card";
 
 export default async function SpeciesList() {
   // Create supabase server component client and obtain user session from stored cookie
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();

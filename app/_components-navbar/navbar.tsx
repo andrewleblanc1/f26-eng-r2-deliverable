@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default async function Navbar({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
   // Create supabase server component client and obtain user session from stored cookie
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
