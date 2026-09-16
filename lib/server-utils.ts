@@ -7,22 +7,12 @@ import { cache } from "react";
 import "server-only";
 import { type Database } from "./schema";
 
-// Note: cookies() is asynchronous as of Next.js 15, so it has to be awaited before the store
-// can be read. That makes this factory async too, so callers must `await` it.
-export const createServerSupabaseClient = cache(async () => {
-  const cookieStore = await cookies();
+export const createServerSupabaseClient = cache(() => {
+  const cookieStore = cookies();
   const supabase = createServerClient<Database>(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
     cookies: {
-      getAll() {
-        return cookieStore.getAll();
-      },
-      setAll(cookiesToSet) {
-        try {
-          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-        } catch {
-          // Server components get a read-only cookie store, so writes throw here. Ignoring is safe
-          // because the middleware refreshes the session cookies on every request.
-        }
+      get(name: string) {
+        return cookieStore.get(name)?.value;
       },
     },
   });
