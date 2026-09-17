@@ -20,7 +20,13 @@ export default async function SpeciesList() {
   // Obtain the ID of the currently signed-in user
   const sessionId = session.user.id;
 
-  const { data: species } = await supabase.from("species").select("*").order("id", { ascending: false });
+  // Join each species to its author's profile. The `species.author` column is only a user id, so the
+  // embedded resource is what lets the detailed view show who added the species. The relationship is
+  // named explicitly (species_author_fkey) because it is the foreign key linking the two tables.
+  const { data: species } = await supabase
+    .from("species")
+    .select("*, author_profile:profiles!species_author_fkey(id, display_name, email, biography)")
+    .order("id", { ascending: false });
 
   return (
     <>

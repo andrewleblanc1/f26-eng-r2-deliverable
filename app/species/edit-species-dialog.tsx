@@ -71,6 +71,7 @@ export default function EditSpeciesDialog({ species }: { species: Species }) {
     common_name: species.common_name,
     kingdom: species.kingdom,
     total_population: species.total_population,
+    endangered: species.endangered,
     image: species.image,
     description: species.description,
   };

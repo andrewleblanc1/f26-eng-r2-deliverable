@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -43,6 +43,7 @@ const speciesSchema = z.object({
     .transform((val) => (!val || val.trim() === "" ? null : val.trim())),
   kingdom: kingdoms,
   total_population: z.number().int().positive().min(1).nullable(),
+  endangered: z.boolean(),
   image: z
     .string()
     .url()
@@ -70,6 +71,8 @@ const defaultValues: Partial<FormData> = {
   common_name: null,
   kingdom: "Animalia",
   total_population: null,
+  // The database column defaults to false, so an unchecked box matches what the backend would store anyway.
+  endangered: false,
   image: null,
   description: null,
 };
@@ -98,6 +101,7 @@ export default function AddSpeciesDialog({ userId }: { userId: string }) {
         kingdom: input.kingdom,
         scientific_name: input.scientific_name,
         total_population: input.total_population,
+        endangered: input.endangered,
         image: input.image,
       },
     ]);
@@ -222,6 +226,33 @@ export default function AddSpeciesDialog({ userId }: { userId: string }) {
                         />
                       </FormControl>
                       <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+              <FormField
+                control={form.control}
+                name="endangered"
+                render={({ field }) => {
+                  // A checkbox is driven by `checked`, not `value`, so we map the boolean onto it
+                  // explicitly rather than spreading the whole field.
+                  const { value, ...rest } = field;
+                  return (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                      <FormControl>
+                        <input
+                          type="checkbox"
+                          className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-primary"
+                          checked={value}
+                          {...rest}
+                          onChange={(event) => field.onChange(event.target.checked)}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Endangered</FormLabel>
+                        <FormDescription>Check this box if the species is classified as endangered.</FormDescription>
+                        <FormMessage />
+                      </div>
                     </FormItem>
                   );
                 }}

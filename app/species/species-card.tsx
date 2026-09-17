@@ -12,11 +12,17 @@ can cause errors with matching props and state in child components if the list o
 */
 import type { Database } from "@/lib/schema";
 import Image from "next/image";
+import DeleteSpeciesDialog from "./delete-species-dialog";
 import EditSpeciesDialog from "./edit-species-dialog";
 import ViewSpeciesDialog from "./view-species-dialog";
 type Species = Database["public"]["Tables"]["species"]["Row"];
+type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
-export default function SpeciesCard({ species, userId }: { species: Species; userId: string }) {
+// species/page.tsx joins each species row to its author's profile, so cards receive the profile
+// nested alongside the row's own columns.
+type SpeciesWithAuthor = Species & { author_profile: Profile | null };
+
+export default function SpeciesCard({ species, userId }: { species: SpeciesWithAuthor; userId: string }) {
   return (
     <div className="m-4 w-72 min-w-72 flex-none rounded border-2 p-3 shadow">
       {species.image && (
@@ -33,9 +39,14 @@ export default function SpeciesCard({ species, userId }: { species: Species; use
       )}
       <p>{species.description ? species.description.slice(0, 150).trim() + "..." : ""}</p>
       <ViewSpeciesDialog species={species} />
-      {/* Only the author of a species may edit it, so the edit dialog is withheld from everyone else.
+      {/* Only the author of a species may edit or delete it, so those dialogs are withheld from everyone else.
       Supabase row-level security enforces this on the backend as well. */}
-      {species.author === userId && <EditSpeciesDialog species={species} />}
+      {species.author === userId && (
+        <>
+          <EditSpeciesDialog species={species} />
+          <DeleteSpeciesDialog species={species} />
+        </>
+      )}
     </div>
   );
 }
