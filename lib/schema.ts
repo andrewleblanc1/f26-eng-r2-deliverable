@@ -36,6 +36,7 @@ export interface Database {
           author: string;
           common_name: string | null;
           description: string | null;
+          endangered: boolean;
           id: number;
           image: string | null;
           kingdom: Database["public"]["Enums"]["kingdom"];
@@ -46,6 +47,7 @@ export interface Database {
           author: string;
           common_name?: string | null;
           description?: string | null;
+          endangered?: boolean;
           id?: number;
           image?: string | null;
           kingdom: Database["public"]["Enums"]["kingdom"];
@@ -56,6 +58,7 @@ export interface Database {
           author?: string;
           common_name?: string | null;
           description?: string | null;
+          endangered?: boolean;
           id?: number;
           image?: string | null;
           kingdom?: Database["public"]["Enums"]["kingdom"];

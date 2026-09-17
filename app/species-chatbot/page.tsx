@@ -1,13 +1,18 @@
-/* eslint-disable */
 "use client";
 import { TypographyH2, TypographyP } from "@/components/ui/typography";
-import { useRef, useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import ReactMarkdown from "react-markdown";
+
+// Shown if the request itself fails (network down, unexpected status) so the chat never dead-ends.
+const ERROR_MESSAGE = "Sorry, something went wrong reaching the chatbot. Please try again.";
 
 export default function SpeciesChatbot() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [message, setMessage] = useState("");
   const [chatLog, setChatLog] = useState<{ role: "user" | "bot"; content: string }[]>([]);
+  // Tracks the in-flight request so we can disable the input and avoid overlapping sends.
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleInput = () => {
     const textarea = textareaRef.current;
     if (textarea) {
@@ -16,11 +21,51 @@ export default function SpeciesChatbot() {
     }
   };
 
-const handleSubmit = async () => {
-  // TODO: Implement this function
-}
+  const handleSubmit = async () => {
+    const trimmed = message.trim();
 
-return (
+    // Ignore empty/whitespace-only sends, and ignore a second send while one is in flight.
+    if (trimmed === "" || isLoading) return;
+
+    // Show the user's message immediately and clear the composer, so the UI feels responsive while
+    // we wait on the API.
+    setChatLog((log) => [...log, { role: "user", content: trimmed }]);
+    setMessage("");
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+    }
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: trimmed }),
+      });
+
+      // The route returns a `response` string on success, and also on a 502 so there is something
+      // readable to show. Fall back to a generic message for any other failure.
+      const data = (await res.json()) as { response?: string; error?: string };
+      const reply = data.response ?? ERROR_MESSAGE;
+
+      setChatLog((log) => [...log, { role: "bot", content: reply }]);
+    } catch (error) {
+      console.error("Chat request failed:", error);
+      setChatLog((log) => [...log, { role: "bot", content: ERROR_MESSAGE }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Enter sends the message; Shift+Enter inserts a newline.
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      void handleSubmit();
+    }
+  };
+
+  return (
     <>
       <TypographyH2>Species Chatbot</TypographyH2>
       <div className="mt-4 flex gap-4">
@@ -58,6 +103,14 @@ return (
               </div>
             ))
           )}
+          {/* Typing indicator while we wait for the bot's reply */}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="max-w-[75%] rounded-2xl rounded-bl-none border border-border bg-foreground p-3 text-sm text-primary-foreground">
+                Thinking...
+              </div>
+            </div>
+          )}
         </div>
         {/* Textarea and submission */}
         <div className="mt-4 flex flex-col items-end">
@@ -66,16 +119,20 @@ return (
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onInput={handleInput}
+            onKeyDown={handleKeyDown}
+            disabled={isLoading}
             rows={1}
             placeholder="Ask about a species..."
-            className="w-full resize-none overflow-hidden rounded border border-border bg-background p-2 text-sm text-foreground focus:outline-none"
+            className="w-full resize-none overflow-hidden rounded border border-border bg-background p-2 text-sm text-foreground focus:outline-none disabled:opacity-50"
           />
           <button
             type="button"
             onClick={() => void handleSubmit()}
-            className="mt-2 rounded bg-primary px-4 py-2 text-background transition hover:opacity-90"
+            // Also disabled on an empty composer so the button matches what handleSubmit will do.
+            disabled={isLoading || message.trim() === ""}
+            className="mt-2 rounded bg-primary px-4 py-2 text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Enter
+            {isLoading ? "Sending..." : "Enter"}
           </button>
         </div>
       </div>

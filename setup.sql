@@ -48,6 +48,7 @@ create table species (
   kingdom kingdom not null,
   description text,
   image text,
+  endangered boolean not null default false,
   author uuid not null references profiles
 );
 -- Set up Row Level Security (RLS)
