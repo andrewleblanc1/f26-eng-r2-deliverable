@@ -1,0 +1,145 @@
+name,speed,diet
+African Elephant,25.0,Herbivore
+African Lion,58.0,Carnivore
+African Wild Dog,56.0,Carnivore
+Alpine Ibex,60.0,Herbivore
+American Bison,48.0,Herbivore
+Arabian Horse,65.0,Herbivore
+Arabian Oryx,55.0,Herbivore
+Arctic Fox,60.0,Omnivore
+Arowana,24.0,Carnivore
+Asian Elephant,40.0,Herbivore
+Atlantic Puffin,40.0,Carnivore
+Atlantic Spotted Dolphin,52.0,Carnivore
+Australian Fur Seal,32.0,Carnivore
+Axolotl,0.8,Carnivore
+Aye-Aye,32.0,Omnivore
+Baird's Tapir,48.0,Herbivore
+Bald Eagle,120.0,Carnivore
+Banded Palm Civet,16.0,Omnivore
+Barbary Macaque,30.0,Herbivore
+Bearded Dragon,52.0,Omnivore
+Bengal Fox,40.0,Omnivore
+Bengal Tiger,65.0,Carnivore
+Black Rhinoceros,56.0,Herbivore
+Blue Jay,32.0,Omnivore
+Bonobo,50.0,Omnivore
+Bornean Orangutan,52.0,Omnivore
+Bottlenose Dolphin,37.0,Carnivore
+Boxer Dog,64.0,Omnivore
+Brown Bear,48.0,Omnivore
+Burmese Python,2.0,Carnivore
+Capybara,32.5,Herbivore
+Cheetah,112.0,Carnivore
+Chimpanzee,40.0,Omnivore
+Clownfish,8.0,Omnivore
+Coelacanth,1.6,Carnivore
+Common Dolphin,60.0,Carnivore
+Coquerel's Sifaka,37.5,Herbivore
+Dalmatian Dog,42.5,Omnivore
+Dhole,56.0,Carnivore
+Dingo,56.0,Carnivore
+Dugong,12.5,Herbivore
+Eastern Gorilla,40.0,Herbivore
+Emperor Penguin,2.25,Carnivore
+Emperor Tamarin,32.0,Omnivore
+European Hedgehog,5.0,Omnivore
+Fennec Fox,32.0,Omnivore
+Fire Salamander,0.8,Carnivore
+Flying Fox,45.0,Herbivore
+Fossa,46.5,Carnivore
+GalÃ¡pagos Penguin,29.5,Carnivore
+Galápagos Tortoise,0.4,Herbivore
+Gaur,35.0,Herbivore
+Gerenuk,55.0,Herbivore
+Gharial,32.0,Carnivore
+Giant Pacific Octopus,24.0,Carnivore
+Giant Panda,32.0,Herbivore
+Gila Monster,1.5,Carnivore
+Goblin Shark,2.3,Carnivore
+Golden Lion Tamarin,10.5,Omnivore
+Great White Shark,56.0,Carnivore
+Green Anaconda,20.0,Carnivore
+Green Sea Turtle,2.4000000000000004,Herbivore
+Grevy's Zebra,64.0,Herbivore
+Harp Seal,20.5,Carnivore
+Harpy Eagle,50.0,Carnivore
+Hippopotamus,25.0,Herbivore
+Horseshoe Crab,1.2000000000000002,Carnivore
+Humpback Whale,25.5,Omnivore
+Iberian Lynx,75.0,Carnivore
+Indri,25.5,Herbivore
+Japanese Giant Hornet,49.0,Carnivore
+Japanese Macaque,30.0,Omnivore
+Kakapo,2.5,Herbivore
+Kangaroo Rat,16.0,Herbivore
+King Cobra,20.0,Carnivore
+Kiwi,8.0,Omnivore
+Komodo Dragon,20.0,Carnivore
+Lemur,26.5,Omnivore
+Lyrebird,0.025,Omnivore
+Manatee,8.0,Herbivore
+Maned Wolf,56.0,Omnivore
+Mantis Shrimp,40.0,Carnivore
+Markhor,52.0,Herbivore
+Meerkat,32.0,Omnivore
+Mountain Gorilla,40.0,Herbivore
+Naked Mole Rat,0.055,Herbivore
+Narwhal,45.0,Carnivore
+Okapi,56.0,Herbivore
+Orangutan,9.0,Omnivore
+Patagonian Mara,30.0,Herbivore
+Polar Bear,40.0,Carnivore
+Praying Mantis,0.6,Carnivore
+Proboscis Monkey,28.0,Herbivore
+Pronghorn,88.5,Herbivore
+Pufferfish,8.0,Carnivore
+Quokka,24.0,Herbivore
+Red Fox,48.0,Omnivore
+Red Kangaroo,56.0,Herbivore
+Red Panda,0.30000000000000004,Herbivore
+Rottweiler,35.0,Carnivore
+Saola,26.0,Herbivore
+Secretary Bird,24.0,Carnivore
+Serval,44.0,Carnivore
+Shoebill,15.0,Carnivore
+Shortfin Mako Shark,45.0,Carnivore
+Siberian Husky,57.5,Carnivore
+Sloth,0.135,Herbivore
+Snow Leopard,50.0,Carnivore
+Snowy Owl,80.0,Carnivore
+Spectacled Bear,45.0,Omnivore
+Sperm Whale,60.0,Carnivore
+Spider Monkey,45.0,Omnivore
+Spotted Hyena,60.0,Carnivore
+Squirrel Monkey,30.0,Omnivore
+Sumatran Orangutan,35.0,Omnivore
+Sumatran Rhino,40.0,Herbivore
+Sumatran Rhinoceros,52.0,Herbivore
+Sun Bear,44.0,Omnivore
+Tapir,48.0,Herbivore
+Tasmanian Devil,16.0,Carnivore
+Tasmanian Tiger,56.0,Carnivore
+Three-Toed Sloth,20.0,Herbivore
+Tibetan Mastiff,45.0,Omnivore
+Tiger,28.0,Carnivore
+Titanoboa,27.0,Carnivore
+Toco Toucan,35.5,Omnivore
+Tree Kangaroo,30.0,Herbivore
+Tuatara,0.03,Carnivore
+Tufted Puffin,17.0,Carnivore
+Uakari,20.0,Omnivore
+Vampire Bat,32.0,Carnivore
+Western Gorilla,40.0,Herbivore
+Western Lowland Gorilla,40.0,Herbivore
+White Rhinoceros,45.0,Herbivore
+White Tiger,22.0,Carnivore
+Wild Boar,20.0,Omnivore
+Wildebeest,47.0,Herbivore
+Wolf,45.0,Carnivore
+Wolverine,63.0,Carnivore
+Wombat,20.0,Herbivore
+Yak,24.0,Herbivore
+Yellow-Eyed Penguin,25.0,Carnivore
+Zebra,25.0,Herbivore
+Zebra Shark,20.0,Carnivore
